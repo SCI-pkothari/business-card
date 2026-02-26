@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parth Kothari | Suttons Creek</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --purple: #52315B;
+    --teal: #00978F;
+    --gold: #FFC000;
+    --white: #ffffff;
+    --light: #f2eff4;
+  }
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--light);
+    font-family: Calibri, Candara, sans-serif;
+    padding: 40px 24px;
+  }
+  .scene { perspective: 1200px; }
+  .card {
+    width: 440px;
+    height: 248px;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: floatIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    cursor: pointer;
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .card:hover { transform: rotateY(180deg); }
+  @keyframes floatIn {
+    from { opacity: 0; transform: translateY(28px) rotateX(8deg); }
+    to   { opacity: 1; transform: translateY(0) rotateX(0deg); }
+  }
+  .face {
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(82,49,91,0.25), 0 4px 14px rgba(0,0,0,0.1);
+  }
+
+  /* FRONT */
+  .front {
+    background: var(--purple);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 22px 28px 20px;
+  }
+  .front::before {
+    content: \'\';
+    position: absolute; top: -50px; right: -50px;
+    width: 210px; height: 210px; border-radius: 50%;
+    background: rgba(255,192,0,0.07); pointer-events: none;
+  }
+  .front::after {
+    content: \'\';
+    position: absolute; bottom: -30px; left: 40px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: rgba(0,151,143,0.10); pointer-events: none;
+  }
+  .logo-wrap {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    position: relative;
+    z-index: 1;
+  }
+  .logo-img {
+    height: 52px;
+    width: auto;
+  }
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10px;
+  }
+  .logo-text .co-name {
+    font-family: Calibri, Candara, sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.03em;
+    line-height: 1.2;
+  }
+  .logo-text .co-tag {
+    font-size: 9px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 0.05em;
+    line-height: 1.4;
+    margin-top: 2px;
+  }
+  .logo-text .co-sub {
+    font-size: 8px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.04em;
+    margin-top: 1px;
+  }
+  .name-block { position: relative; z-index: 1; }
+  .name {
+    font-family: \'Libre Baskerville\', Georgia, serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.015em;
+    line-height: 1.15;
+  }
+  .title {
+    font-size: 9.5px;
+    color: var(--gold);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-top: 5px;
+    line-height: 1.5;
+  }
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, var(--teal), var(--gold) 60%, transparent);
+    position: relative; z-index: 1;
+  }
+  .contact-row { display: flex; gap: 30px; position: relative; z-index: 1; }
+  .contact-item { display: flex; flex-direction: column; }
+  .contact-label {
+    font-size: 7px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--teal); margin-bottom: 3px;
+  }
+  .contact-value { font-size: 11px; color: rgba(255,255,255,0.92); letter-spacing: 0.02em; }
+
+  /* BACK */
+  .back {
+    background: var(--white);
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 28px;
+  }
+  .back-bar-top { position: absolute; top: 0; left: 0; right: 0; height: 5px; background: var(--purple); }
+  .back-bar-bottom { position: absolute; bottom: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--purple), var(--teal), var(--gold)); }
+  .back-tagline {
+    font-size: 8px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--purple); font-weight: 700; text-align: center;
+  }
+  .back-logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-img-back { height: 56px; width: auto; }
+  .back-logo-text .co-name-back {
+    font-family: Calibri, Candara, sans-serif;
+    font-size: 17px; font-weight: 700;
+    color: var(--purple); letter-spacing: 0.03em; line-height: 1.2;
+  }
+  .back-logo-text .co-tag-back {
+    font-size: 10px; color: var(--teal); letter-spacing: 0.05em; line-height: 1.4; margin-top: 2px;
+  }
+  .back-logo-text .co-sub-back {
+    font-size: 8.5px; color: rgba(82,49,91,0.5); letter-spacing: 0.04em; margin-top: 1px;
+  }
+  .back-sub { font-size: 9px; color: rgba(82,49,91,0.45); letter-spacing: 0.1em; text-align: center; text-transform: uppercase; }
+  .hover-hint {
+    position: absolute; bottom: -28px; left: 50%; transform: translateX(-50%);
+    font-size: 10px; color: rgba(82,49,91,0.4); letter-spacing: 0.1em;
+    text-transform: uppercase; white-space: nowrap;
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:0.3;} 50%{opacity:0.8;} }
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="card" title="Hover to flip">
+
+    <!-- FRONT -->
+    <div class="face front">
+      <div class="logo-wrap">
+        <img class="logo-img" src="data:image/png;base64,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" alt="Suttons Creek logo">
+        <div class="logo-text">
+          <div class="co-name">Suttons Creek</div>
+          <div class="co-tag">The Device Team for Pharma</div>
+          <div class="co-sub">A BlueRidge Life Sciences Company</div>
+        </div>
+      </div>
+
+      <div class="name-block">
+        <div class="name">Parth Kothari</div>
+        <div class="title">Sr. Principal Consultant &nbsp;·&nbsp; Combination Products</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="contact-row">
+        <div class="contact-item">
+          <span class="contact-label">Email</span>
+          <span class="contact-value">pkothari@suttonscreek.com</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">Mobile</span>
+          <span class="contact-value">(805) 288-0699</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BACK -->
+    <div class="face back">
+      <div class="back-bar-top"></div>
+      <div class="back-bar-bottom"></div>
+      <div class="back-tagline">Combination Product Excellence</div>
+      <div class="back-logo-wrap">
+        <img class="logo-img-back" src="data:image/png;base64,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" alt="Suttons Creek logo">
+        <div class="back-logo-text">
+          <div class="co-name-back">Suttons Creek</div>
+          <div class="co-tag-back">The Device Team for Pharma</div>
+          <div class="co-sub-back">A BlueRidge Life Sciences Company</div>
+        </div>
+      </div>
+      <div class="back-sub">suttonscreek.com</div>
+    </div>
+
+    <div class="hover-hint">Hover to flip</div>
+  </div>
+</div>
+</body>
+</html>
