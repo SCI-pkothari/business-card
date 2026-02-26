@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parth Kothari | Suttons Creek</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --purple: #52315B;
+    --teal: #00978F;
+    --gold: #FFC000;
+    --white: #ffffff;
+    --light: #f2eff4;
+  }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--light);
+    font-family: 'Calibri', Candara, sans-serif;
+    padding: 40px 24px;
+  }
+
+  .scene { perspective: 1200px; }
+
+  .card {
+    width: 440px;
+    height: 248px;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: floatIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    cursor: pointer;
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .card:hover { transform: rotateY(180deg); }
+
+  @keyframes floatIn {
+    from { opacity: 0; transform: translateY(28px) rotateX(8deg); }
+    to   { opacity: 1; transform: translateY(0) rotateX(0deg); }
+  }
+
+  .face {
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(82,49,91,0.25), 0 4px 14px rgba(0,0,0,0.1);
+  }
+
+  /* FRONT */
+  .front {
+    background: var(--purple);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 22px 28px 20px;
+  }
+
+  .front::before {
+    content: '';
+    position: absolute;
+    top: -50px; right: -50px;
+    width: 210px; height: 210px;
+    border-radius: 50%;
+    background: rgba(255,192,0,0.07);
+    pointer-events: none;
+  }
+  .front::after {
+    content: '';
+    position: absolute;
+    bottom: -30px; left: 40px;
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: rgba(0,151,143,0.10);
+    pointer-events: none;
+  }
+
+  .logo-wrap {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    z-index: 1;
+  }
+
+  .sci-logo-front { width: 170px; }
+
+  .name-block {
+    position: relative;
+    z-index: 1;
+  }
+
+  .name {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.015em;
+    line-height: 1.15;
+  }
+
+  .title {
+    font-size: 9.5px;
+    font-weight: 400;
+    color: var(--gold);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-top: 5px;
+    line-height: 1.5;
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, var(--teal), var(--gold) 60%, transparent);
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact-row {
+    display: flex;
+    gap: 30px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact-item { display: flex; flex-direction: column; }
+
+  .contact-label {
+    font-size: 7px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 3px;
+  }
+
+  .contact-value {
+    font-size: 11px;
+    color: rgba(255,255,255,0.92);
+    letter-spacing: 0.02em;
+  }
+
+  /* BACK */
+  .back {
+    background: var(--white);
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 28px;
+  }
+
+  .back-bar-top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    background: var(--purple);
+  }
+
+  .back-bar-bottom {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--purple), var(--teal), var(--gold));
+  }
+
+  .back-tagline {
+    font-size: 8px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--purple);
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .sci-logo-back { width: 130px; }
+
+  .back-sub {
+    font-size: 9px;
+    color: rgba(82,49,91,0.45);
+    letter-spacing: 0.1em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .hover-hint {
+    position: absolute;
+    bottom: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: rgba(82,49,91,0.4);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%,100% { opacity: 0.3; }
+    50% { opacity: 0.8; }
+  }
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="card" title="Hover to flip">
+
+    <!-- FRONT -->
+    <div class="face front">
+
+      <!-- Logo top-right: white version on purple -->
+      <div class="logo-wrap">
+        <svg class="sci-logo-front" viewBox="0 0 300 62" xmlns="http://www.w3.org/2000/svg">
+          <!-- Teal icon box -->
+          <rect x="0" y="0" width="62" height="62" fill="#00978F" rx="2"/>
+          <!-- Stylized S path -->
+          <path d="M31 12 C18 12, 14 21, 14 27 C14 35, 22 37, 30 39 C40 42, 48 44, 48 52 C48 58, 40 52, 31 52"
+                stroke="white" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <!-- Name -->
+          <text x="72" y="26" font-family="Calibri,Candara,sans-serif" font-size="20" font-weight="700" fill="white" letter-spacing="0.3">Suttons Creek</text>
+          <text x="72" y="42" font-family="Calibri,Candara,sans-serif" font-size="11" fill="rgba(255,255,255,0.85)" letter-spacing="0.2">The Device Team for Pharma</text>
+          <text x="72" y="57" font-family="Calibri,Candara,sans-serif" font-size="9" fill="rgba(255,255,255,0.55)" letter-spacing="0.15">A BlueRidge Life Sciences Company</text>
+        </svg>
+      </div>
+
+      <!-- Name + Title -->
+      <div class="name-block">
+        <div class="name">Parth Kothari</div>
+        <div class="title">Sr. Principal Consultant &nbsp;·&nbsp; Combination Products</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Contact -->
+      <div class="contact-row">
+        <div class="contact-item">
+          <span class="contact-label">Email</span>
+          <span class="contact-value">pkothari@suttonscreek.com</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">Mobile</span>
+          <span class="contact-value">(805) 288-0699</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BACK -->
+    <div class="face back">
+      <div class="back-bar-top"></div>
+      <div class="back-bar-bottom"></div>
+
+      <div class="back-tagline">Combination Product Excellence</div>
+
+      <!-- Logo on white: teal text version -->
+      <svg class="sci-logo-back" viewBox="0 0 300 62" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="62" height="62" fill="#00978F" rx="2"/>
+        <path d="M31 12 C18 12, 14 21, 14 27 C14 35, 22 37, 30 39 C40 42, 48 44, 48 52 C48 58, 40 52, 31 52"
+              stroke="white" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <text x="72" y="26" font-family="Calibri,Candara,sans-serif" font-size="20" font-weight="700" fill="#52315B" letter-spacing="0.3">Suttons Creek</text>
+        <text x="72" y="42" font-family="Calibri,Candara,sans-serif" font-size="11" fill="#00978F" letter-spacing="0.2">The Device Team for Pharma</text>
+        <text x="72" y="57" font-family="Calibri,Candara,sans-serif" font-size="9" fill="rgba(82,49,91,0.45)" letter-spacing="0.15">A BlueRidge Life Sciences Company</text>
+      </svg>
+
+      <div class="back-sub">suttonscreek.com</div>
+    </div>
+
+    <div class="hover-hint">Hover to flip</div>
+  </div>
+</div>
+</body>
+</html>
